@@ -1,0 +1,153 @@
+# Basic ISO-8583 definition
+# (c) 2025 Patricio Palma <ppalma.dev@protonmail.com>
+# Based on the information published on https://en.wikipedia.org/wiki/ISO_8583
+
+# Encoding defined the default encoding of the fields used in this messaging scheme.
+# At the moment ASCII is the only encoded supported. (BDC and EBCDIC are in the road map).
+ENCODING ASCII
+
+# MTI sets the encoding for the MTI field, if not provided the default encoding is used.
+MTI ASCII
+
+# Field keyword is used to define each of the supported fields
+FIELD   2 n .. 19       # Primary Account Number (PAN)
+FIELD   3 n 6           # Processing Code
+FIELD   4 n 12          # Amount Transaction
+FIELD   5 n 12          # Amount Settlement
+FIELD   6 n 12          # Amount Cardholder Billing
+FIELD   7 n 10          # Transmission date & time
+FIELD   8 n 8           # Amount, cardholder billing fee
+FIELD   9 n 8           # Conversion rate, settlement
+
+FIELD  10 n 8           # Conversion rate, cardholder billing
+FIELD  11 n 6           # System trace audit number
+FIELD  12 n 6           # Local transaction time
+FIELD  13 n 4           # Local transaction date
+FIELD  14 n 4           # Expiration date
+FIELD  15 n 4           # Settlement date
+FIELD  16 n 4           # Currency conversion date
+FIELD  17 n 4           # Capture date
+FIELD  18 n 4           # Merchant type or merchant category code
+FIELD  19 n 3           # Acquiring institution (country code)
+
+FIELD  20 n 3           # PAN extended (country code)
+FIELD  21 n 3           # Forwarding institution (country code)
+FIELD  22 n 3           # Point of Service entry mode
+FIELD  23 n 3           # Application PAN sequence number
+FIELD  24 n 3           # Function code (ISO8583:1993) or Network internation identifier (NII)
+FIELD  25 n 2           # Point of service condition code
+FIELD  26 n 2           # Point of service capture code
+FIELD  27 n 1           # Authorizing identification response length
+# TODO what is x+n?? (not supported)
+FIELD  28 x+n 8         # Amount, transaction fee
+FIELD  29 x+n 8         # Amount, settlement fee
+
+FIELD  30 x+n 8         # Amount, transaction processing fee
+FIELD  31 x+n 8         # Amount, settlement processing fee
+FIELD  32 n .. 11       # Acquiring institution identification code
+FIELD  33 n .. 11       # Forwarding institution identification code
+FIELD  34 ns .. 28      # Primary account number, extended
+FIELD  35 z .. 37       # Track 2 data
+FIELD  36 n ... 104     # Track 3 data
+FIELD  37 an 12         # Retrieval reference number
+FIELD  38 an 6          # Authorization identification response
+FIELD  39 an 2          # Response code
+
+FIELD  40 an 3          # Service restriction code
+FIELD  41 ans 8         # Card acceptor terminal identification
+FIELD  42 ans 15        # Card acceptor identification code
+FIELD  43 ans 40        # Card acceptor name/location
+FIELD  44 an .. 25      # Additional response data
+FIELD  45 an .. 76      # Track 1 data
+FIELD  46 an ... 999    # Additional data (ISO)
+FIELD  47 an ... 999    # Additional data (national)
+FIELD  48 an ... 999    # Additional data (private)
+# TODO a_n mean either alpha or numeric (not supported)
+FIELD  49 a_n 3         # Currency code, transaction
+
+FIELD  50 a_n 3         # Currency code, settlement
+FIELD  51 a_n 3         # Currency code, cardholder billing
+# TODO b means binary? (not supported)
+FIELD  52 b 64          # Personal identification number
+FIELD  53 n 16          # Security related control information
+FIELD  54 an ... 120    # Additional amounts
+FIELD  55 ans ... 999   # ICC data - EMV having multiple tags
+FIELD  56 ans ... 999   # Reserved (ISO)
+FIELD  57 ans ... 999   # Reserved (national)
+FIELD  58 ans ... 999   # Reserved (national)
+FIELD  59 ans ... 999   # Reserved (national)
+
+FIELD  60 ans ... 999   # Reserved (national)
+FIELD  61 ans ... 999   # Reserved (private)
+FIELD  62 ans ... 999   # Reserved (private)
+FIELD  63 ans ... 999   # Reserved (private)
+FIELD  64 b 64          # Message authentication code (MAC)
+FIELD  65 b 1           # Extended bitmap indicator
+FIELD  66 n 1           # Settlement code
+FIELD  67 n 2           # Extended payment code
+FIELD  68 n 3           # Receiving institution country code
+FIELD  69 n 3           # Settlement institution country code
+
+FIELD  70 n 3           # Network management information code
+FIELD  71 n 4           # Message number
+FIELD  72 n 6           # Last message's number
+FIELD  73 n 6           # Action data (yymmdd)
+FIELD  74 n 10          # Number of credits
+FIELD  75 n 10          # Credits, reversal number
+FIELD  76 n 10          # Number of debits
+FIELD  78 n 10          # Transfer number
+FIELD  79 n 10          # Transfer, reversal number
+
+FIELD  80 n 10          # Number of inquiries
+FIELD  81 n 10          # Number of authorizations
+FIELD  82 n 12          # Credits, processing fee amount
+FIELD  83 n 12          # Credits, transaction fee amount
+FIELD  84 n 12          # Debits, processing fee amount
+FIELD  85 n 12          # Debits, transaction fee amount
+FIELD  86 n 16          # Total amount of credits
+FIELD  87 n 16          # Credits, reversal amount
+FIELD  88 n 16          # Total amount of debits
+FIELD  89 n 16          # Debits, reversal amount
+
+FIELD  90 n 42          # Original data elements
+FIELD  91 an 1          # File update code
+FIELD  92 an 2          # File security code
+FIELD  93 an 5          # Response indicator
+FIELD  94 an 7          # Service indicator
+FIELD  95 an 42         # Replacement amounts
+FIELD  96 b 64          # Message security code
+FIELD  97 x+n 16        # Net settlement amount
+FIELD  98 ans 25        # Payee
+FIELD  99 n .. 11       # Settlement institution identification code
+
+FIELD 100 n .. 11       # Receiving institution identification code
+FIELD 101 ans .. 17     # File name
+FIELD 102 ans .. 28     # Account identification 1
+FIELD 103 ans .. 28     # Account identification 2
+FIELD 104 ans ... 100   # Transaction description
+FIELD 105 ans ... 999   # Reserved (ISO)
+FIELD 106 ans ... 999   # Reserved (ISO)
+FIELD 107 ans ... 999   # Reserved (ISO)
+FIELD 108 ans ... 999   # Reserved (ISO)
+FIELD 109 ans ... 999   # Reserved (ISO)
+
+FIELD 110 ans ... 999   # Reserved (ISO)
+FIELD 111 ans ... 999   # Reserved (ISO)
+FIELD 112 ans ... 999   # Reserved (national)
+FIELD 113 ans ... 999   # Reserved (national)
+FIELD 114 ans ... 999   # Reserved (national)
+FIELD 115 ans ... 999   # Reserved (national)
+FIELD 116 ans ... 999   # Reserved (national)
+FIELD 117 ans ... 999   # Reserved (national)
+FIELD 118 ans ... 999   # Reserved (national)
+FIELD 119 ans ... 999   # Reserved (national)
+
+FIELD 120 ans ... 999   # Reserved (private)
+FIELD 121 ans ... 999   # Reserved (private)
+FIELD 122 ans ... 999   # Reserved (private)
+FIELD 123 ans ... 999   # Reserved (private)
+FIELD 124 ans ... 999   # Reserved (private)
+FIELD 125 ans ... 999   # Reserved (private)
+FIELD 126 ans ... 999   # Reserved (private)
+FIELD 127 ans ... 999   # Reserved (private)
+FIELD 128 b 64          # Message authentication code
